@@ -92,6 +92,24 @@ const SnakeGame = () => {
     const handleKeyDown = (e) => {
       if (gameOver) return;
 
+      // Prevent default behavior for arrow keys and game controls to avoid page scrolling
+      if (
+        [
+          "ArrowUp",
+          "ArrowDown",
+          "ArrowLeft",
+          "ArrowRight",
+          "w",
+          "a",
+          "s",
+          "d",
+          " ",
+          "p",
+        ].includes(e.key)
+      ) {
+        e.preventDefault();
+      }
+
       switch (e.key) {
         case "ArrowUp":
         case "w":
