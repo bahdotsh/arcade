@@ -1,8 +1,17 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
+test("renders arcade menu page", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const titleElement = screen.getByText(/React Arcade/i);
+  expect(titleElement).toBeInTheDocument();
+});
+
+test("renders game list", () => {
+  render(<App />);
+  const snakeGameTitle = screen.getByText(/Snake/i);
+  expect(snakeGameTitle).toBeInTheDocument();
+
+  const snakeDescription = screen.getByText(/Classic Snake game/i);
+  expect(snakeDescription).toBeInTheDocument();
 });
