@@ -2,8 +2,7 @@ import { render, screen } from "@testing-library/react";
 import App from "./App";
 import { ThemeContext } from "./context/ThemeContext";
 
-// This approach creates a custom wrapper that provides the ThemeContext values directly
-// instead of using the actual ThemeProvider that depends on browser APIs
+// Custom theme provider for testing
 const CustomThemeProvider = ({ children }) => {
   const themeContextValue = {
     darkMode: false,
@@ -22,13 +21,16 @@ const renderWithTheme = (ui, options) =>
 
 test("renders arcade menu page", () => {
   renderWithTheme(<App />);
-  const titleElement = screen.getByText(/Arcade/i);
+  // Be more specific - look for the heading element instead
+  const titleElement = screen.getByRole("heading", {
+    name: /Arcade$/i,
+    level: 1,
+  });
   expect(titleElement).toBeInTheDocument();
 });
 
 test("renders game list", () => {
   renderWithTheme(<App />);
-  // Use a more specific query or query by role
   const gameItem = screen.getByRole("heading", { name: /Snake/i });
   expect(gameItem).toBeInTheDocument();
 
