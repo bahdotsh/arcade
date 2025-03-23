@@ -2,32 +2,75 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
+    max-width: 900px;
+    width: 100%;
+}
+
+.snake-game h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.game-area-container {
+    position: relative;
+    padding: 15px;
+    border-radius: 15px;
+    background: var(--card-bg);
+    box-shadow: var(--card-shadow);
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--card-border);
+    margin: 10px 0;
 }
 
 .game-area {
     position: relative;
-    background-color: #222;
-    border: 2px solid #444;
-    margin: 20px 0;
+    background-color: var(--game-bg);
+    border: 2px solid rgba(93, 143, 83, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .snake-cell {
     position: absolute;
-    background-color: #5d8f53;
-    border-radius: 2px;
+    background-color: var(--snake-color);
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(126, 217, 87, 0.5);
+    transition: all 0.1s;
+}
+
+.snake-head {
+    background-color: var(--snake-head);
+    border-radius: 6px;
 }
 
 .food {
     position: absolute;
-    background-color: #e74c3c;
+    background-color: var(--food-color);
     border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.6);
 }
 
-.score {
-    font-size: 24px;
-    font-weight: bold;
+.score-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
     margin-bottom: 10px;
+    padding: 10px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.score,
+.high-score {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--text-color);
+    padding: 8px 15px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.1);
 }
 
 .game-over {
@@ -35,29 +78,187 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 20px;
-    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    padding: 25px;
+    border-radius: 15px;
     text-align: center;
     z-index: 10;
+    box-shadow: var(--card-shadow);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--card-border);
+    width: 80%;
+    max-width: 300px;
+}
+
+.game-over h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--accent-color);
+}
+
+.game-over p {
+    font-size: 1rem;
+    margin-bottom: 15px;
 }
 
 .game-over button {
-    background-color: #4caf50;
+    background-color: var(--accent-color);
     border: none;
     color: white;
-    padding: 10px 20px;
+    padding: 10px 25px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 10px 2px;
+    margin: 10px 5px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 8px;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.game-over button:hover {
+    background-color: var(--accent-hover);
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.controls-row {
+    display: flex;
+    margin: 4px 0;
+}
+
+.control-btn {
+    width: 50px;
+    height: 50px;
+    margin: 4px;
+    border-radius: 10px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-color);
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.control-btn:hover,
+.control-btn:active {
+    background: var(--accent-color);
+    color: white;
 }
 
 .instructions {
-    margin-top: 20px;
+    margin-top: 15px;
     text-align: center;
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 10px;
+    max-width: 450px;
+    font-size: 0.9rem;
+}
+
+.instructions h3 {
+    margin-bottom: 8px;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+}
+
+.instructions p {
+    color: var(--secondary-text);
+    margin-bottom: 5px;
+    font-size: 0.85rem;
+}
+
+/* Mobile layout optimization */
+@media (max-width: 768px) {
+    .snake-game {
+        padding: 10px 5px;
+        display: grid;
+        grid-template-areas:
+            "header header"
+            "score score"
+            "game game"
+            "controls instructions";
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto 1fr auto;
+        gap: 10px;
+        height: calc(100vh - 60px);
+        max-height: 800px;
+    }
+
+    .snake-game h2 {
+        grid-area: header;
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+    }
+
+    .score-container {
+        grid-area: score;
+        margin-bottom: 5px;
+    }
+
+    .game-area-container {
+        grid-area: game;
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        max-height: none;
+        padding: 10px;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .game-area {
+        width: 100%;
+        height: 100%;
+        max-width: 90vw;
+        max-height: 90vw;
+    }
+
+    .controls {
+        grid-area: controls;
+        margin-top: 0;
+    }
+
+    .instructions {
+        grid-area: instructions;
+        margin-top: 0;
+        padding: 10px;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    .instructions h3 {
+        font-size: 1rem;
+    }
+
+    .instructions p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Extra optimization for smaller phones */
+@media (max-width: 480px) {
+    .snake-game {
+        grid-template-areas:
+            "header header"
+            "score score"
+            "game game"
+            "controls controls"
+            "instructions instructions";
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr auto auto;
+    }
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Menu from "./components/Menu";
 import GameContainer from "./components/GameContainer";
+import ThemeToggle from "./components/ThemeToggle";
 import "./styles/App.css";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <div className="app">
+      <ThemeToggle />
       {currentGame ? (
         <GameContainer gameKey={currentGame} onBackToMenu={handleBackToMenu} />
       ) : (
