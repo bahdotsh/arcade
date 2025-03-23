@@ -1,36 +1,24 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App";
-import { ThemeProvider } from "./context/ThemeContext";
+import { ThemeContext } from "./context/ThemeContext";
 
-// Mock matchMedia
-Object.defineProperty(window, "matchMedia", {
-  writable: true,
-  value: jest.fn().mockImplementation((query) => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: jest.fn(), // deprecated
-    removeListener: jest.fn(), // deprecated
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  })),
-});
+// This approach creates a custom wrapper that provides the ThemeContext values directly
+// instead of using the actual ThemeProvider that depends on browser APIs
+const CustomThemeProvider = ({ children }) => {
+  const themeContextValue = {
+    darkMode: false,
+    toggleTheme: jest.fn(),
+  };
 
-// Mock localStorage
-const localStorageMock = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-  removeItem: jest.fn(),
-  clear: jest.fn(),
+  return (
+    <ThemeContext.Provider value={themeContextValue}>
+      {children}
+    </ThemeContext.Provider>
+  );
 };
-Object.defineProperty(window, "localStorage", {
-  value: localStorageMock,
-});
 
-// Helper function to render with theme provider
 const renderWithTheme = (ui, options) =>
-  render(ui, { wrapper: ThemeProvider, ...options });
+  render(ui, { wrapper: CustomThemeProvider, ...options });
 
 test("renders arcade menu page", () => {
   renderWithTheme(<App />);
