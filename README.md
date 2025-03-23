@@ -19,7 +19,7 @@ Its hosted at [https://arcade.gokuls.in/](https://arcade.gokuls.in/)
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/react-arcade.git
+   git clone https://github.com/bahdotsh/arcade.git
    cd react-arcade
    ```
 
