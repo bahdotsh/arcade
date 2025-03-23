@@ -1,0 +1,44 @@
+.menu-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.menu-container h1 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.game-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.game-item {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition:
+        transform 0.3s,
+        box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.game-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.game-item h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.game-item p {
+    color: #666;
+}

@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+# React Arcade
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Arcade is a flexible, modular game platform built with React that allows you to enjoy multiple games in one application.
+Its hosted at [https://arcade.gokuls.in/](https://arcade.gokuls.in/)
 
-## Available Scripts
+## Currently Available Games
 
-In the project directory, you can run:
+- **Snake**
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting Started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
 
-### `npm test`
+- Node.js (v14.0.0 or later)
+- npm (v6.0.0 or later)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation
 
-### `npm run build`
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/react-arcade.git
+   cd react-arcade
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Start the development server:
+   ```bash
+   npm start
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. Open your browser and visit:
+   ```
+   http://localhost:3000
+   ```
 
-### `npm run eject`
+## Adding New Games
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The arcade is designed to make adding new games straightforward:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Create a new folder in `src/games/` (e.g., `TetrisGame`)
+2. Create your game component and CSS files
+3. Add your game to the registry in `src/games/index.js`:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```javascript
+import SnakeGame from "./SnakeGame/SnakeGame";
+import TetrisGame from "./TetrisGame/TetrisGame";
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+const games = {
+  snake: {
+    title: "Snake",
+    description: "Classic Snake game...",
+    component: SnakeGame,
+  },
+  tetris: {
+    title: "Tetris",
+    description: "Block-stacking puzzle game...",
+    component: TetrisGame,
+  },
+  // Add more games here
+};
 
-## Learn More
+export default games;
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Project Structure
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+react-arcade/
+├── public/              # Static files
+├── src/                 # Source code
+│   ├── components/      # Reusable components
+│   │   ├── GameContainer.js
+│   │   └── Menu.js
+│   ├── games/           # Individual games
+│   │   ├── SnakeGame/
+│   │   │   ├── SnakeGame.js
+│   │   │   └── SnakeGame.css
+│   │   └── index.js     # Game registry
+│   ├── styles/          # Global styles
+│   │   ├── App.css
+│   │   └── Menu.css
+│   ├── App.js           # Main component
+│   └── index.js         # Entry point
+└── package.json         # Dependencies and scripts
+```
 
-### Code Splitting
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Contributions are welcome! If you'd like to add a game or improve the platform:
 
-### Analyzing the Bundle Size
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-game`)
+3. Commit your changes (`git commit -m 'Add amazing game'`)
+4. Push to the branch (`git push origin feature/amazing-game`)
+5. Open a Pull Request
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Future Plans
 
-### Making a Progressive Web App
+- Add more classic games (Tetris, Pong, Breakout, etc.)
+- Add user accounts and score tracking
+- Implement multiplayer functionality
+- Create mobile-optimized controls
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Happy gaming!
