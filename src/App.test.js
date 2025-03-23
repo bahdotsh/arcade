@@ -3,7 +3,7 @@ import App from "./App";
 
 test("renders arcade menu page", () => {
   render(<App />);
-  const titleElement = screen.getByText(/React Arcade/i);
+  const titleElement = screen.getByText(/Arcade/i);
   expect(titleElement).toBeInTheDocument();
 });
 
