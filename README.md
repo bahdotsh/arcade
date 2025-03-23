@@ -1,4 +1,4 @@
-# React Arcade
+# Arcade
 
 Arcade is a flexible, modular game platform built with React that allows you to enjoy multiple games in one application.
 Its hosted at [https://arcade.gokuls.in/](https://arcade.gokuls.in/)
