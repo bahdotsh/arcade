@@ -24,7 +24,7 @@ const Menu = ({ onSelectGame }) => {
       </div>
 
       <div className="footer">
-        <p>© 2023 Arcade App | All games for entertainment purposes</p>
+        <p>© 2025 Arcade App | All games for entertainment purposes</p>
       </div>
     </div>
   );
