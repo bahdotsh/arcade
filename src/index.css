@@ -1,43 +1,48 @@
 :root {
-    --primary-bg: #f8f9fa;
-    --secondary-bg: #e9ecef;
-    --menu-bg: rgba(255, 255, 255, 0.7);
-    --text-color: #343a40;
-    --secondary-text: #495057;
-    --accent-color: #ff6b6b;
-    --accent-hover: #ff5252;
-    --card-bg: rgba(255, 255, 255, 0.8);
-    --card-border: rgba(0, 0, 0, 0.1);
-    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    --game-bg: #f1f3f5;
-    --snake-color: #7ed957;
-    --snake-head: #5d8f53;
-    --food-color: #ff6b6b;
+    /* Enhanced Rustic Retro Arcade Color Palette */
+    --primary-bg: #f0e6d2;
+    --secondary-bg: #e6d8c0;
+    --menu-bg: rgba(232, 222, 203, 0.9);
+    --text-color: #5a4a3f;
+    --secondary-text: #7d6b5d;
+    --accent-color: #c45f38;
+    --accent-hover: #aa4d29;
+    --card-bg: rgba(238, 231, 218, 0.95);
+    --card-border: rgba(162, 138, 109, 0.5);
+    --card-shadow: 0 6px 12px rgba(110, 94, 75, 0.2);
+    --game-bg: #e8decb;
+    --snake-color: #6b8f71;
+    --snake-head: #4e6b52;
+    --food-color: #c45f38;
+
+    /* Typography */
+    --font-family: "Press Start 2P", "Courier New", monospace;
+    --content-font: "VT323", "Courier New", monospace;
 }
 
 .dark-theme {
-    --primary-bg: #232526;
-    --secondary-bg: #414345;
-    --menu-bg: rgba(30, 30, 30, 0.8);
-    --text-color: #f8f9fa;
-    --secondary-text: #ced4da;
-    --accent-color: #ff6b6b;
-    --accent-hover: #ff5252;
-    --card-bg: rgba(40, 40, 40, 0.8);
-    --card-border: rgba(255, 255, 255, 0.1);
-    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    --game-bg: #343a40;
-    --snake-color: #7ed957;
-    --snake-head: #5d8f53;
-    --food-color: #ff6b6b;
+    --primary-bg: #2b2622;
+    --secondary-bg: #332e29;
+    --menu-bg: rgba(43, 38, 34, 0.95);
+    --text-color: #e0d3bd;
+    --secondary-text: #bfae96;
+    --accent-color: #c45f38;
+    --accent-hover: #d47a55;
+    --card-bg: rgba(56, 49, 42, 0.95);
+    --card-border: rgba(201, 178, 150, 0.3);
+    --card-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    --game-bg: #3a342e;
+    --snake-color: #7ba682;
+    --snake-head: #5b8761;
+    --food-color: #e67248;
 }
+
+/* Import Google Fonts for retro arcade feel */
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap");
 
 body {
     margin: 0;
-    font-family:
-        -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-        sans-serif;
+    font-family: var(--content-font);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: var(--primary-bg);
@@ -45,11 +50,50 @@ body {
     transition:
         background-color 0.3s ease,
         color 0.3s ease;
+    letter-spacing: 0.5px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+button,
+.play-button,
+.score,
+.high-score {
+    font-family: var(--font-family);
+}
+
+p,
+div {
+    font-family: var(--content-font);
+}
+
+button {
+    font-family: var(--font-family);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
 }
 
 code {
     font-family:
         source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+/* Improved scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--primary-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: 6px;
+    border: 3px solid var(--primary-bg);
 }
 
 /* Responsive design */
@@ -60,6 +104,16 @@ html {
 @media (max-width: 768px) {
     html {
         font-size: 14px;
+    }
+
+    body {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 12px;
     }
 }
 

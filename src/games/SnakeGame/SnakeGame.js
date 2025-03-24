@@ -16,12 +16,24 @@ const SnakeGame = () => {
   const [highScore, setHighScore] = useState(0);
   const [speed, setSpeed] = useState(100);
   const [isPaused, setIsPaused] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(false);
   const gameAreaRef = useRef(null);
   const [gameSize, setGameSize] = useState({ width: 400, height: 400 });
+  const [hasPlayedBefore, setHasPlayedBefore] = useState(false);
 
   // Game grid size - smaller cell size for more precise movement
   const gridSize = 20;
   const cellSize = Math.min(gameSize.width, gameSize.height) / gridSize;
+
+  // Check if user has played before
+  useEffect(() => {
+    const played = localStorage.getItem("snakeGamePlayed");
+    if (played) {
+      setHasPlayedBefore(true);
+    } else {
+      setShowInstructions(true);
+    }
+  }, []);
 
   // Responsive game size
   useEffect(() => {
@@ -29,8 +41,9 @@ const SnakeGame = () => {
       if (gameAreaRef.current) {
         const container = gameAreaRef.current.parentElement;
         const containerWidth = container.clientWidth - 30; // padding
-        const containerHeight = container.clientHeight - 30;
-        const size = Math.min(containerWidth, containerHeight, 400);
+        // Make sure height is also considered for better responsiveness
+        const windowHeight = window.innerHeight * 0.6; // use 60% of viewport height
+        const size = Math.min(containerWidth, windowHeight, 400);
         setGameSize({ width: size, height: size });
       }
     };
@@ -60,6 +73,14 @@ const SnakeGame = () => {
     setScore(0);
     setSpeed(100);
     setIsPaused(false);
+
+    // Only show instructions if they haven't played before
+    if (!hasPlayedBefore) {
+      setShowInstructions(true);
+      // After the first game, mark that they've played before
+      setHasPlayedBefore(true);
+      localStorage.setItem("snakeGamePlayed", "true");
+    }
   };
 
   const getRandomFoodPosition = () => {
@@ -77,6 +98,16 @@ const SnakeGame = () => {
   };
 
   const handleDirectionChange = (newDirection) => {
+    if (showInstructions) {
+      setShowInstructions(false);
+      // After closing instructions for the first time, mark that they've played
+      if (!hasPlayedBefore) {
+        localStorage.setItem("snakeGamePlayed", "true");
+        setHasPlayedBefore(true);
+      }
+      return;
+    }
+
     if (
       (newDirection === "UP" && direction !== "DOWN") ||
       (newDirection === "DOWN" && direction !== "UP") ||
@@ -91,6 +122,17 @@ const SnakeGame = () => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (gameOver) return;
+
+      // Close instructions on any key press
+      if (showInstructions) {
+        setShowInstructions(false);
+        // After closing instructions for the first time, mark that they've played
+        if (!hasPlayedBefore) {
+          localStorage.setItem("snakeGamePlayed", "true");
+          setHasPlayedBefore(true);
+        }
+        return;
+      }
 
       // Prevent default behavior for arrow keys and game controls to avoid page scrolling
       if (
@@ -142,11 +184,11 @@ const SnakeGame = () => {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [direction, gameOver]);
+  }, [direction, gameOver, showInstructions, hasPlayedBefore]);
 
   // Game loop
   useEffect(() => {
-    if (gameOver || isPaused) return;
+    if (gameOver || isPaused || showInstructions) return;
 
     const moveSnake = () => {
       const newSnake = [...snake];
@@ -213,7 +255,17 @@ const SnakeGame = () => {
     const gameInterval = setInterval(moveSnake, speed);
 
     return () => clearInterval(gameInterval);
-  }, [snake, direction, food, gameOver, score, speed, isPaused, highScore]);
+  }, [
+    snake,
+    direction,
+    food,
+    gameOver,
+    score,
+    speed,
+    isPaused,
+    highScore,
+    showInstructions,
+  ]);
 
   return (
     <div className="snake-game">
@@ -256,7 +308,7 @@ const SnakeGame = () => {
             }}
           />
 
-          {isPaused && !gameOver && (
+          {isPaused && !gameOver && !showInstructions && (
             <div className="game-over">
               <h3>Paused</h3>
               <p>Press space or P to continue</p>
@@ -272,6 +324,24 @@ const SnakeGame = () => {
                 <p className="new-high-score">New High Score! 🎉</p>
               )}
               <button onClick={reset}>Play Again</button>
+            </div>
+          )}
+
+          {showInstructions && (
+            <div className="game-instructions">
+              <h3>How to Play</h3>
+              <div className="instruction-content">
+                <p>• Use arrow keys, WASD, or touch controls to move</p>
+                <p>• Eat food to grow longer and score points</p>
+                <p>• Avoid walls and don't bite yourself!</p>
+                <p>• Press P or Space to pause the game</p>
+              </div>
+              <button onClick={() => setShowInstructions(false)}>
+                Let's Play!
+              </button>
+              <p className="instruction-hint">
+                Press any key or click the button to start
+              </p>
             </div>
           )}
         </div>
@@ -319,13 +389,6 @@ const SnakeGame = () => {
             ↓
           </div>
         </div>
-      </div>
-
-      <div className="instructions">
-        <h3>How to Play</h3>
-        <p>• Use arrows/WASD or touch controls for movement</p>
-        <p>• Eat food to grow and score points</p>
-        <p>• Avoid walls and yourself</p>
       </div>
     </div>
   );

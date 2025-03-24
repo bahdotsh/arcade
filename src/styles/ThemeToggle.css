@@ -1,10 +1,10 @@
 .theme-toggle {
-    background: transparent;
-    border: none;
+    background: var(--card-bg);
+    border: 3px solid var(--card-border);
     color: var(--text-color);
     cursor: pointer;
-    padding: 8px;
-    border-radius: 50%;
+    padding: 10px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,18 +12,40 @@
     top: 20px;
     right: 20px;
     z-index: 100;
-    transition: background-color 0.2s;
+    transition: all 0.3s;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.15);
 }
 
 .theme-toggle:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: var(--accent-color);
+    color: white;
+    transform: rotate(15deg);
 }
 
-.dark-theme .theme-toggle:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+.theme-toggle:active {
+    transform: rotate(15deg) scale(0.9);
+}
+
+.theme-toggle svg {
+    width: 24px;
+    height: 24px;
+    filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.2));
 }
 
 @media (max-width: 768px) {
+    .theme-toggle {
+        top: 15px;
+        right: 15px;
+        padding: 8px;
+    }
+
+    .theme-toggle svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
     .theme-toggle {
         top: 10px;
         right: 10px;
