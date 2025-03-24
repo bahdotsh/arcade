@@ -340,7 +340,7 @@ const SnakeGame = () => {
                 Let's Play!
               </button>
               <p className="instruction-hint">
-                Press any key or click the button to start
+                Press any key or tap button to start
               </p>
             </div>
           )}

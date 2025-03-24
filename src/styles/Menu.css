@@ -272,3 +272,50 @@
         margin: 0 auto;
     }
 }
+@media (max-width: 400px) {
+    .menu-container h1 {
+        font-size: 2rem;
+        letter-spacing: 3px;
+    }
+
+    .menu-container h1:before,
+    .menu-container h1:after {
+        width: 30px;
+    }
+
+    .menu-subtitle {
+        font-size: 1rem;
+        margin-bottom: 25px;
+    }
+
+    .game-list {
+        gap: 15px;
+        padding: 10px 0;
+    }
+
+    .game-item {
+        padding: 15px;
+    }
+
+    .game-icon {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 15px;
+    }
+
+    .game-item h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .play-button {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+    }
+
+    .footer {
+        margin-top: 25px;
+        padding: 15px 0;
+        font-size: 0.8rem;
+    }
+}
