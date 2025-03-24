@@ -1,5 +1,6 @@
 import React from "react";
 import SnakeGame from "./SnakeGame/SnakeGame";
+import PacmanGame from "./PacmanGame/PacmanGame";
 
 // Enhanced Snake game icon with a more arcade-like appearance
 const SnakeIcon = () => (
@@ -16,6 +17,22 @@ const SnakeIcon = () => (
   </svg>
 );
 
+// Pacman game icon
+const PacmanIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    width="100%"
+    height="100%"
+  >
+    <path
+      d="M12,2c5.5,0,10,4.5,10,10s-4.5,10-10,10S2,17.5,2,12S6.5,2,12,2 M12,4C7.6,4,4,7.6,4,12s3.6,8,8,8c0.3,0,0.7,0,1-0.1
+    C8.6,19.5,5.3,16,5.3,12S8.6,4.5,13,4.1C12.7,4,12.3,4,12,4 M9,8l7,4l-7,4V8z"
+    />
+  </svg>
+);
+
 // Registry of all games
 const games = {
   snake: {
@@ -24,6 +41,13 @@ const games = {
       "Classic Snake game. Eat food, grow longer, don't hit the walls or yourself! How long can you survive?",
     component: SnakeGame,
     icon: <SnakeIcon />,
+  },
+  pacman: {
+    title: "Pacman",
+    description:
+      "Navigate through a maze, eat dots, avoid ghosts! Grab power pellets to turn the tables on those pesky ghosts.",
+    component: PacmanGame,
+    icon: <PacmanIcon />,
   },
   // Add more games here in the future
 };
